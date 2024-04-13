@@ -1,0 +1,127 @@
+
+
+
+
+.section { 
+   
+     justify-content:left; 
+     align-items:center; 
+     height:100vh; 
+     background-size:cover;
+     text-align: center;
+     padding-left: 50px;
+    
+  
+     }
+    .label {
+      display: block;
+      font-size: x-large;
+      color: rgb(3, 3, 3);
+      padding: 5px;
+    }
+  
+    .input {
+      font-size: larger;
+      padding: 5px;
+      margin: 2px;
+  
+    }
+  
+    .btn {
+      color: rgb(22, 18, 18);
+      background-color: rgb(204, 226, 76);
+      border-radius: 5px;
+      font-size: larger;
+      display: block;
+      padding: 5px;
+      margin: 10px auto;
+      font-weight: 600;
+    }
+    #form1 {
+      flex-wrap:wrap ;
+      width: 400px; 
+      justify-content:center; 
+      padding-left: 70px;
+      border:10px solid #9e1616;
+      border-radius:5px; 
+      font-size:16px; 
+    }
+    #container {
+     
+      width:650px;
+      height:700px; 
+      background-color: rgb(0, 195, 255); 
+      color: rgb(0, 109, 182);
+      background-size: 150px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 25px;
+      border: 10px solid;
+    }
+
+    #container1 {
+     
+        width:650px;
+        height:400px; 
+        background-color: rgb(122, 172, 234); 
+        color: rgb(31, 9, 26);
+        background-size: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 25px;
+        border: 10px solid;
+      }
+      .input1 {
+        font-size: larger;
+        padding: 5px;
+        margin: 2px;
+    
+      }
+      .label1 {
+        display: block;
+        font-size: x-large;
+        color: rgb(3, 3, 3);
+        padding: 5px;
+      }
+      #form {
+        flex-wrap:wrap ;
+        width: 400px; 
+        justify-content:center; 
+        margin:auto;
+        border:10px solid #2db130;
+        border-radius:5px; 
+        font-size:16px; 
+
+      }
+      p{
+        font-weight: 1000;
+        font-size: x-large;
+        justify-content:center;
+        text-align: center;
+
+      }
+      h1{
+        font-weight: 1000;
+        font-size: 3000;
+        text-align: center;
+
+      }
+      h3{
+        text-align: left;
+        color:black;
+
+      }
+      h2{
+        padding-left: 20px;
+        font-size: large;
+      }
+      .massge,.age{
+        flex-wrap:wrap ;
+        width: 400px; 
+        justify-content:center; 
+        margin:auto;
+        border:10px solid #2db130;
+        border-radius:5px; 
+        font-size:16px;  
+      }
+     
