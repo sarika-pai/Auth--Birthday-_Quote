@@ -3,13 +3,13 @@ import "./SignUp.css"
 import { ref, set} from "firebase/database";
 import { db , auth } from "./firebase.js"
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import SignupSuccess from './SignupSuccess.js';
  
 
 
-function SignUp(props){
+function SignUp({signedup}){
  
  
 
@@ -20,7 +20,7 @@ const[email ,setEmail]=useState("");
  const[date,setDate]=useState('');
 
  const[isSignupSuccess, setIsSignupSuccess]=useState(false);
-//  const navigate= useNavigate();
+  const navigate= useNavigate();
  
 
  const handleonSubmit= async(e) =>{
@@ -33,14 +33,13 @@ const[email ,setEmail]=useState("");
         const userId=Math.floor(Math.random()*10000);
  writeUserData(userId,name,email,date)
 
- 
-    
-
-        console.log(user);
+        console.log("Successful user sign up",user);
         setIsSignupSuccess(true);
-        // navigate("/signUpSuccess",{state:{date : date}} );
+        console.log("state:date: ",date)
+        signedup(name, date);
+        navigate("/signUpSuccess");
         console.log("isSignupSuccess:", isSignupSuccess);
-    
+        
       
         })
         .catch((error) =>{
@@ -64,50 +63,53 @@ const[email ,setEmail]=useState("");
 
  
  return(
-    <main id="container">
-        <section className="section">
+    <main>
+        <section className="container" >
             <div>
                 <div>
-                    <h1> Sign Up Page</h1>
-                    <form id="form1">
-                        <div>
+                    <h1> Sign Up </h1>
+                    <form  className="form1">
+                        <div className='form-group'>
                             <label htmlFor="name" className="label">
                                 Name
                             </label>
                             <input type="name"
                             className="input"
                             label="Name"
+                            id="name"
                             value={name}
                             onChange={(e)=>setName(e.target.value)}
                             placeholder = "Enter your name"
                             required />
                         </div>
-                        <div>
+                        <div className='form-group'>
                             <label htmlFor="email-address" className="label">
                                 Email Address
                             </label>
                             <input type="email"
                             label="Email address"
+                            id="email"
                             className="input"
                             value={email}
                             onChange={(e)=>setEmail(e.target.value)}
                             placeholder="Email address"
                             required />
                         </div>
-                        <div>
+                        <div className='form-group'>
                             <label htmlFor="password" className="label">
                                 Password
                             </label>
                             <input 
                             type="password"
                             label="Create password"
+                            id="password"
                             className="input"
                             value={password}
                             onChange={(e)=>setPassword(e.target.value)}
                             placeholder="Password"
                             required />
                         </div>
-                        <div>
+                        <div className='form-group'>
                             <label htmlFor="date" className="label">
                                 BirthDate
                             </label>
@@ -115,8 +117,11 @@ const[email ,setEmail]=useState("");
                             type="date"
                             label="birth date"
                             className="input"
+                            id="birthdate"
                             value={date}
-                            onChange={(e)=>setDate(e.target.value)}
+                            onChange={(e)=>{
+                                console.log("selected date", e.target.value);
+                                setDate(e.target.value)}}
                             placeholder="Enter your birthdate"
                             required />
                         </div>

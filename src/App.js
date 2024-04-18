@@ -10,9 +10,14 @@ import BirthdayCount from './BirthdayCount';
 
 
 
+
 function App() {
     const[currentForm,setCurrentForm]=useState("login");
     const[currentPage,setCurrentPage]=useState("SignUp");
+    const[userDetail,setUserDetail]= useState({userName:"", date:""})
+    const {userName, date} = userDetail
+    
+
    
     const toggleForm=(formName)=>{
      setCurrentForm(formName); 
@@ -21,6 +26,13 @@ function App() {
         setCurrentPage(pageName);
      
     }
+    const handler=(userName,date)=>{
+        setUserDetail({
+            userName:userName,
+            date:date
+        })
+    }
+    
    
     return (
         <>
@@ -31,10 +43,10 @@ function App() {
             <Routes>
                
                <Route path="/" element={<Login onFormSwitch={toggleForm}/>} />
-               <Route path="/SignUp" element={<SignUp onFormSwitch={toggleForm} />} />
-               <Route path= "/signup-success" component={SignupSuccess}/>
-               <Route path="/BirthdayCount" element={<BirthdayCount/>}/>
-               <Route path="/ToDoList" element={<ToDoList/>} />
+               <Route path="/SignUp" element={<SignUp signedup={handler} onFormSwitch={toggleForm} />} />
+                <Route path= "/SignupSuccess" element={<SignupSuccess userName= {userName} date={date} />}/>
+               {/* <Route path="/BirthdayCount" element={<BirthdayCount />}/>
+               <Route path="/ToDoList" element={<ToDoList/>} />  */}
             
             </Routes>
         

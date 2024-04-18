@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from "react";
-import {db} from "./firebase"
-import {ref, get} from "firebase/database";
+
 
  function BirthdayCount ({date}) {
     const [daysDifference, setDaysDifference]=useState(null);
+    const [quote, setQuote]=useState("");
 
-  
+  console.log("DAte :",date);
   const currentDate=new Date();
   const currentMonth= currentDate.getMonth() ;
   const currentDay = currentDate.getDate ();
   console.log("currentday", currentDay)
-  const birthDate=new Date(date);
-  const month= birthDate.getMonth() ;
-  const day= birthDate.getDate();
-  let nextBirthday = new Date(currentDate.getFullYear() , month , day);
+  const[year, month,day]=date.split('-')
+  const birthDate= new Date(year,month-1, day);
+  console.log("birthdate", birthDate)
+  console.log("month for next Birthday cal", month)
+  console.log("day for next Birthday cal", day)
+  let nextBirthday = new Date(currentDate.getFullYear() , month-1 , day);
+  console.log("nextBirthday",nextBirthday)
   if (nextBirthday<=currentDate){
-    nextBirthday = new Date(currentDate.getFullYear()+1 , month , day);
+    nextBirthday = new Date(currentDate.getFullYear()+1 , month-1 , day);
   }
   // Set time components of both dates to midnight
   nextBirthday.setHours(0, 0, 0, 0);
@@ -37,28 +40,57 @@ import {ref, get} from "firebase/database";
             }
         }
         setDaysDifference(adjustedDifference);
+        //Fetch Quote
+        fetchQuote();
       }, [Difference, currentMonth, currentDay, month, day]);
-     
-        if(daysDifference === 0 ||(currentMonth === month && currentDay=== day)){
-            return <div> Happy Birthday!!!!</div>;
+
+     const fetchQuote = async () => {
+    try {
+      const response = await fetch("add type.fit link for quotes");
+      if (!response.ok) {
+        throw new Error(`Network response was not ok (${response.status})`);
+      }
+      const data = await response.json();
+      if (data && data.length > 0) {
+        const randomIndex = Math.floor(Math.random() * data.length);
+        const randomQuote = data[randomIndex];
+        setQuote(randomQuote.text);
+      } else {
+        console.error("No quotes found in the fetched data.");
+      }
+    } catch (error) {
+      console.error("There was a problem fetching or handling the data:", error);
+    }
+  };
+        
+  if(daysDifference === 365 ||(currentMonth === month && currentDay=== day )){
+            return (
+              <>
+            <div> Happy Birthday!!!!</div>
+            <p>Quote of the Special day:<span className="quote-text"> {quote}</span></p>
+            </>)
         }else if(daysDifference === 0){
-            return <div>Today is your birthday !</div>
+            return (
+            <>
+            <div>Today is your birthday !</div>
+            <p>Quote of the Special day:<span className="quote-text"> {quote}</span></p>
+            </>
+            )
 
         } else{
            
             return(
-                <div>
+              <>
+                <div className="birthday-container">
         <p>Days Remaining for your birthday: {daysDifference}</p>
-        <p>Birthday Date: {date}</p>
+        
+        <p>Quote of the Special day:<span className="quote-text"> {quote}</span></p>
         </div>
+        </>
             );
         }
 
-
-
-
-
- 
+         
 
 }  
 
@@ -74,28 +106,3 @@ export default BirthdayCount;
 
 
 
-//      useEffect(()=>{
-//        async function fetchData() {
-//             try{
-//                 const dataRef = ref(db, "/users");
-//                 const usersSnapshot = await  get(dataRef);
-
-//                  if(usersSnapshot.exists()){
-//                     const userData = usersSnapshot.val();
-//                     const userIds = Object.keys(userData);
-//                     console.log("userId",userIds)
-//                     const lastUserId=userIds[userIds.length-1];
-//                     const lastUserData= userData[lastUserId];
-//                     const lastUserDate= lastUserData.date;
-//                     console.log("Last user date",lastUserDate)
-//                     setBdate(lastUserDate)
-                    
-//             }else {
-//                  console.log('User Date info not found')
-//          }
-//     } catch (error){
-//         console.log("Error fetching data",error);
-//     }
-//     };
-//     fetchData(); 
-//  },[]);

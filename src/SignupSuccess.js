@@ -1,12 +1,18 @@
 import React from 'react';
 import BirthdayCount from './BirthdayCount';
+import { useNavigate } from 'react-router-dom';
 
-const SignupSuccess = ({date}) => {
-  console.log("Date",date)
+const SignupSuccess = ({userName ,date}) => {
+  
+  const navigate= useNavigate;
+  console.log("Date received in SignupSuccess:", date)
+  console.log("userName:", userName)
+  
+
   return (
-    <div>
-      <h2>Signup Successful!</h2>
-      <p>Thank you for signing up. You can now access your account.{<BirthdayCount date={date}/>}</p>
+    <div className="container-success">
+      {/* <h2>{userName} Signup Successful!</h2> */}
+      <p style={{ marginBottom:"100px", gap: "50px" }}>Thank you for signing up. You can now access your account.{<BirthdayCount date={date}/>}</p>
     </div>
   );
 };

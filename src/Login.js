@@ -31,17 +31,17 @@ const onLogin = (e) =>{
 
 return(
     <>
-    <main id="container1">
-        <section>
+    <main>
+        <section className="container">
             <div>
              <p> Sign In</p> 
              <form id="form">
-                <div>
+                <div className="form-group">
                     <label htmlFor="email-address" className="label1">
                         Email Address
                     </label>
                     <input 
-                    id="email-address"
+                    id="email"
                     className="input1"
                     name="email"
                     type="email"
@@ -50,7 +50,7 @@ return(
                     required
                     />
                 </div>
-                <div>
+                <div className= "form-group">
                     <label htmlFor="password" className="label1">
                         Password
                     </label>
